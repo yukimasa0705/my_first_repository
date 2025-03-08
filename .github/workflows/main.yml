@@ -12,6 +12,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Install jq
+        run: sudo apt-get install jq
+
       - name: Get the latest issue with Gantt chart
         id: get_previous_issue
         run: |
