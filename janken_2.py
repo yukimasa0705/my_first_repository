@@ -9,6 +9,7 @@ player_hand=input("プレイヤーの手を整数で入力してください>>")
 jyanken_t="グー","チョキ","パー"
 # 整数かどうか
 try:
+    
     #　整数に変換
     player_hand=int(player_hand)
     #　プレイヤーの手を表示
