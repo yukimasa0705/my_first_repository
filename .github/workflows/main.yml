@@ -1,8 +1,8 @@
-name: Create Gantt Chart Issue
+name: Create Gantt Chart Issue with Previous Data
 
 on:
   schedule:
-    cron: '0 23 * * *'  # 日本時間8時（UTCで23時）
+    - cron: '0 23 * * *'  # 毎日日本時間8時（UTC 23時）
 
 jobs:
   create_issue:
@@ -12,11 +12,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create a new issue with Gantt chart
+      - name: Get the latest issue with Gantt chart
+        id: get_previous_issue
+        run: |
+          latest_issue=$(curl -s \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            "https://api.github.com/repos/${{ github.repository }}/issues?state=all&labels=gantt-chart&sort=created&direction=desc" | jq '.[0]')
+          
+          # 取得したイシューのボディ内容を抽出
+          gantt_chart_body=$(echo $latest_issue | jq -r '.body')
+
+          echo "Previous Gantt Chart: $gantt_chart_body"
+
+          echo "::set-output name=gantt_chart::$gantt_chart_body"
+
+      - name: Create a new issue with previous Gantt chart
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # 前回のガントチャートを含めて新しいイシューを作成
+          new_gantt_chart_body="## Gantt Chart\n\n${{ steps.get_previous_issue.outputs.gantt_chart }}\n\nThis issue will track the Gantt chart for today."
+          
           curl -X POST \
             -H "Authorization: token $GITHUB_TOKEN" \
-            -d '{"title": "New Gantt Chart for Today", "body": "## Gantt Chart\n\n- Task 1: Pending\n- Task 2: Pending\n- Task 3: Pending\n\nThis issue will track the Gantt chart for today."}' \
+            -d '{"title": "New Gantt Chart for Today", "body": "'"$new_gantt_chart_body"'"}' \
             https://api.github.com/repos/${{ github.repository }}/issues
