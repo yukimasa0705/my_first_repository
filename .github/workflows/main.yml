@@ -20,10 +20,11 @@ jobs:
         run: |
           latest_issue=$(curl -s \
             -H "Authorization: token $GITHUB_TOKEN" \
-            "https://api.github.com/repos/${{ github.repository }}/issues?state=all&labels=gantt-chart&sort=created&direction=desc" | jq '.[0]')
+            "https://api.github.com/repos/${{ github.repository }}/issues?state=all&labels=gantt-chart&sort=created&direction=desc")
           
-          # 取得したイシューのボディ内容を抽出
-          gantt_chart_body=$(echo $latest_issue | jq -r '.body')
+          echo "Latest issue response: $latest_issue"  # レスポンスをログに表示
+
+          gantt_chart_body=$(echo $latest_issue | jq -r '.[0].body')
 
           echo "Previous Gantt Chart: $gantt_chart_body"
 
