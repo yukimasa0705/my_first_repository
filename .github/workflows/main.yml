@@ -1,27 +1,22 @@
-name: Update Gantt Chart on Issue
+name: Create Gantt Chart Issue
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 毎日深夜0時に実行
-  issues:
-    types: [opened, edited]
+    cron: '0 23 * * *'  # 日本時間8時（UTCで23時）
 
 jobs:
-  update-gantt-chart:
+  create_issue:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
-      - name: Update Gantt chart on issue
-        uses: peter-evans/create-or-update-issue-comment@v2
-        with:
-          issue-number: ${{ github.event.issue.number }}
-          body: |
-            ## Gantt Chart
-            - Task 1: In Progress
-            - Task 2: Completed
-            - Task 3: Pending
+
+      - name: Create a new issue with Gantt chart
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          curl -X POST \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d '{"title": "New Gantt Chart for Today", "body": "## Gantt Chart\n\n- Task 1: Pending\n- Task 2: Pending\n- Task 3: Pending\n\nThis issue will track the Gantt chart for today."}' \
+            https://api.github.com/repos/${{ github.repository }}/issues
