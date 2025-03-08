@@ -1,0 +1,27 @@
+name: Update Gantt Chart on Issue
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 毎日深夜0時に実行
+  issues:
+    types: [opened, edited]
+
+jobs:
+  update-gantt-chart:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Update Gantt chart on issue
+        uses: peter-evans/create-or-update-issue-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ## Gantt Chart
+            - Task 1: In Progress
+            - Task 2: Completed
+            - Task 3: Pending
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
