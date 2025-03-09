@@ -50,9 +50,15 @@ try-exceptを活用し、ユーザーが間違った入力をしてもスムー�
 
 Judge クラスを導入し、判定の責務を分離することで、コードの保守性を向上。
 
-🖥️ GitHub リンク
-
-https://github.com/yukimasa0705/my_first_repository
-
 このプロジェクトを通して、シンプルなプログラムをどのように拡張し、より柔軟な設計へと進化させていくかを学びました。
+
+[作業日誌リンク](https://github.com/yukimasa0705/my_first_repository/tree/yukimasa0705/issue1/dailyReport)
+
+ここをクリックすれば、プロジェクトの進行や日々の作業メモを簡単に確認できます。進捗やアイデアを管理するために活用しています。
+
+
+
+
+
+
 
