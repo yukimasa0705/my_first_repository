@@ -4,22 +4,27 @@ from random import randint
 print("じゃんけんゲームを始めます")
 # ルールの説明をします
 print("0:グー 1:チョキ 2:パー")
+# プレイヤーの手の入力が例外処理となった場合のループ処理
+while True:
 # プレイヤーの手を入力
-player_hand=input("プレイヤーの手を整数で入力してください>>")
-jyanken_t="グー","チョキ","パー"
-# 整数かどうか
-try:
-    
-    #　整数に変換
-    player_hand=int(player_hand)
-    #　プレイヤーの手を表示
-    print(f"あなたの手は{jyanken_t[player_hand]}です")
-except ValueError:
-    print("数字ではない文字が入力されました")
-    sys.exit()
-except IndexError:
-    print("0 1 2 以外の入力がされました")
-    sys.exit()
+    player_hand=input("プレイヤーの手をルールに従い入力してください>>")
+    jyanken_t="グー","チョキ","パー"
+    # 整数かどうか
+    try:      
+        #　整数に変換
+        player_hand=int(player_hand)
+        #　プレイヤーの手を表示
+        print(f"あなたの手は{jyanken_t[player_hand]}です")
+    except ValueError:
+        print("整数ではない文字が入力されました")
+        continue
+    except IndexError:
+        print("3以上の入力がされました")
+        continue
+    if player_hand<0:
+         print("マイナスの整数が入力がされました")
+         continue
+    break
 # PCの手を決定
 PC_hand=randint(0,2)
 # PCの手を表示
