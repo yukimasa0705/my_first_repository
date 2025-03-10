@@ -1,0 +1,10 @@
+# 判定
+if jyanken_t[player_hand] == PC_hand:
+    print("あいこでしょ")
+    continue # あいこの時、再度手を入力させる
+elif (jyanken_t[player_hand] == "グー" and PC_hand == "チョキ") or \
+     (jyanken_t[player_hand] == "チョキ" and PC_hand == "パー") or \
+     (jyanken_t[player_hand] == "パー" and PC_hand == "グー"):
+    print("あなたの勝ちです")
+else:
+    print("あなたの負けです")
