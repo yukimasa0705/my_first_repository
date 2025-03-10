@@ -1,4 +1,3 @@
-import sys
 from random import choice  # ランダム選択のためにchoiceをインポート
 
 # ゲームの開始宣言をします
