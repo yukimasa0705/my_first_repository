@@ -1,0 +1,6 @@
+from random import choice  # ランダム選択のためにchoiceをインポート
+# jyanken_tはループ外で一度だけ定義
+jyanken_t = ("グー", "チョキ", "パー")
+# PCの手をランダムに決定
+PC_hand = choice(jyanken_t)  # jyanken_tからランダムに選ぶ
+print(f"PCの手は{PC_hand}です")
