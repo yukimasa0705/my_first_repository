@@ -1,3 +1,4 @@
+from janken_v3_Player import Player
 # MyPlayerのクラス化（プレイヤークラス作成の布石として名前を変更しました)       
 class MyPlayer(Player):
     def __init__(self):

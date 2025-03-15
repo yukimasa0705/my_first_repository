@@ -1,3 +1,5 @@
+from random import choice
+from janken_v3_Player import Player
 # PCPlayerのクラス化
 class PCPlayer(Player): 
     def __init__(self):

@@ -1,5 +1,7 @@
+from abc import ABC, abstractmethod
 class Player(ABC):
     # constructer
+
     def __init__(self,name):
         # property
         self.name=name #my or PC
