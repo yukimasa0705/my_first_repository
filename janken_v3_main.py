@@ -3,18 +3,14 @@ from janken_v3_PCPlayer import  PCPlayer
 from janken_v3_Judge import Judge
 # じゃんけんゲームのメイン処理
 print("じゃんけんゲームを始めます")
-print("0:グー 1:チョキ 2:パー")
-# プレイヤーの作成
-myPlayer = MyPlayer()
-pcPlayer1 = PCPlayer(0)
-pcPlayer2 = PCPlayer(1)
-judge = Judge()
+num_computers = int(input("コンピュータの人数を入力してください: "))
 
 # プレイヤーの手を決定
-players = [myPlayer, pcPlayer1, pcPlayer2]
+players = [MyPlayer()] + [PCPlayer(i) for i in range(num_computers)]
 
 while len(players) > 1:
     while True:
+        print("0:グー 1:チョキ 2:パー")
     # それぞれの手を決定
         for p in players:
             p.hand=p.get_hand() # ここで手を決める

@@ -2,10 +2,11 @@ from random import choice
 from janken_v3_Player import Player
 # PCPlayerのクラス化
 class PCPlayer(Player): 
-    NICKNAMES = ["タロウ", "ジロー"]
+    NICKNAMES = ["タロウ", "ジロー", "サブロー", "シロー", "ゴロー",
+"ロク", "ナナ", "ハチ", "キュー", "ジュウ"]
     def __init__(self,index):
         # PCプレイヤーに名前を付け
-        name=self.NICKNAMES[index]
+        name=self.NICKNAMES[index % len(self.NICKNAMES)]
         # スーパークラス（親クラス）のコンストラクタを呼び出す
         super().__init__(name)
 
